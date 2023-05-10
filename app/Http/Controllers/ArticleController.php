@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class ArticleController extends Controller
 {
@@ -47,7 +48,8 @@ class ArticleController extends Controller
             'content' => $request->content,
             'featured_image' => $request->image_name,
         ]);
-        return 'artikel berhasil disimpan';
+        return redirect()->route('article.create')
+        ->with('success', 'artikel berhasil disimpan');
     }
 
     /**
@@ -109,5 +111,11 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function cetak_pdf() {
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles.cetak_pdf', ['articles' => $articles]);
+        return $pdf->stream();
     }
 }

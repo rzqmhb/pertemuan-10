@@ -22,7 +22,6 @@ class Mahasiswa extends Model
     protected $fillable = [
     'nim',
     'nama',
-    'foto',
     'tgl_lahir',
     'jurusan',
     'email',
@@ -32,5 +31,9 @@ class Mahasiswa extends Model
 
     public function kelas(){
         return $this->belongsTo(Kelas::class);
+    }
+
+    public function matakuliah(){
+        return $this->belongsToMany(MataKuliah::class, 'mahasiswa_matakuliah', 'mahasiswa_id', 'matakuliah_id')->withPivot('nilai');
     }
 }

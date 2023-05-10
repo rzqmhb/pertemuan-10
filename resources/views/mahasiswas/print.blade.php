@@ -1,4 +1,5 @@
 @extends('mahasiswas.layout')
+
 @section('content')
 <div class="container mt-3">
     <div class="text-center">
@@ -9,7 +10,7 @@
         <div class="col">
             <strong>Name: </strong> {{$Mahasiswa->nama}}<br>
             <strong>NIM: </strong> {{$Mahasiswa->nim}}<br>
-            <strong>Kelas: </strong> {{$Mahasiswa->kelas->nama_kelas}}
+            <strong>Class: </strong> {{$Mahasiswa->kelas->nama_kelas}}
         </div>
     </div>
     <br>
@@ -33,10 +34,5 @@
             @endforeach
         </tbody>
     </table>
-
-    <div class="col d-flex justify-content-end align-items-end">
-        <a href="{{ route('print', $Mahasiswa->nim) }}" class="btn btn-warning">Cetak PDF</a>
-    </div>
-    <a href="{{ route('mahasiswas.index') }}" class="btn btn-success">Kembali</a>
 </div>
 @endsection

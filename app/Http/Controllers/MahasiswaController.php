@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class MahasiswaController extends Controller
 {
@@ -67,7 +68,7 @@ class MahasiswaController extends Controller
             'no_hp' => 'required',
         ]);
 
-        if ($request->file('image')) {
+        if ($request->file('foto')) {
             $image_name = $request->file('foto')->store('images','public');
         }
 
@@ -185,5 +186,11 @@ class MahasiswaController extends Controller
     public function khs($nim){
         $Mahasiswa=Mahasiswa::find($nim);
         return view('mahasiswas.khs', compact('Mahasiswa'));
+    }
+
+    public function print($nim){
+        $Mahasiswa = Mahasiswa::find($nim);
+        $pdf = PDF::loadView('mahasiswas.print', compact('Mahasiswa'));
+        return $pdf->stream();
     }
 }

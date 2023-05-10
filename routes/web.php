@@ -29,4 +29,8 @@ Route::resource('mahasiswas', MahasiswaController::class);
 
 Route::resource('article', ArticleController::class);
 
+Route::get('/article/cetak/{id}', [ArticleController::class, 'cetak_pdf'])->name('cetak');
+
 Route::get('/mahasiswas/khs/{nim}', [MahasiswaController::class, 'khs'])->name('khs');
+
+Route::get('mahasiswa/print/{nim}', [MahasiswaController::class, 'print'])->name('print');
